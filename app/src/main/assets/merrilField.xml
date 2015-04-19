@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<dwml version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd">
+  <head>
+    <product concise-name="dwmlByDay" operational-mode="developmental" srsName="WGS 1984">
+      <creation-date refresh-frequency='PT1H'>2015-04-13T06:31:43-08:00</creation-date>
+     <category>current observations and forecast</category>
+    </product>
+    <source>
+      <production-center>Anchorage, AK</production-center>
+      <credit>http://pafc.arh.noaa.gov</credit>
+      <more-information>http://www.nws.noaa.gov/forecasts/xml/</more-information>
+    </source>
+  </head>
+  <data type="forecast">
+
+  <location>
+    <location-key>point1</location-key>
+    <description>Merrill Field, AK</description>
+    <point latitude="61.21" longitude="-149.83"/>
+    <city state="AK">Merrill Field</city>
+    <height datum="mean sea level">135</height>
+  </location>
+<moreWeatherInformation applicable-location="point1">http://forecast.weather.gov/MapClick.php?lat=61.21&amp;lon=-149.83</moreWeatherInformation>
+  <time-layout time-coordinate="local" summarization="12hourly">
+    <layout-key>k-p12h-n14-1</layout-key>
+      <start-valid-time period-name="Tonight">2015-04-13T18:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Tuesday">2015-04-14T06:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Tuesday Night">2015-04-14T18:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Wednesday">2015-04-15T06:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Wednesday Night">2015-04-15T18:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Thursday">2015-04-16T06:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Thursday Night">2015-04-16T18:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Friday">2015-04-17T06:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Friday Night">2015-04-17T18:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Saturday">2015-04-18T06:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Saturday Night">2015-04-18T18:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Sunday">2015-04-19T06:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Sunday Night">2015-04-19T18:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Monday">2015-04-20T06:00:00-08:00</start-valid-time>
+  </time-layout>
+
+  <time-layout time-coordinate="local" summarization="12hourly">
+    <layout-key>k-p24h-n7-1</layout-key>
+      <start-valid-time period-name="Tonight">2015-04-13T18:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Tuesday Night">2015-04-14T18:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Wednesday Night">2015-04-15T18:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Thursday Night">2015-04-16T18:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Friday Night">2015-04-17T18:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Saturday Night">2015-04-18T18:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Sunday Night">2015-04-19T18:00:00-08:00</start-valid-time>
+  </time-layout>
+
+  <time-layout time-coordinate="local" summarization="12hourly">
+    <layout-key>k-p24h-n7-2</layout-key>
+      <start-valid-time period-name="Tuesday">2015-04-14T06:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Wednesday">2015-04-15T06:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Thursday">2015-04-16T06:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Friday">2015-04-17T06:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Saturday">2015-04-18T06:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Sunday">2015-04-19T06:00:00-08:00</start-valid-time>
+      <start-valid-time period-name="Monday">2015-04-20T06:00:00-08:00</start-valid-time>
+  </time-layout>
+
+
+  <parameters applicable-location="point1">
+
+    <temperature type="minimum" units="Fahrenheit" time-layout="k-p24h-n7-1">
+      <name>Daily Minimum Temperature</name>
+        <value>26</value>
+        <value>31</value>
+        <value>31</value>
+        <value>30</value>
+        <value>33</value>
+        <value>35</value>
+        <value>M</value>
+    </temperature>
+
+    <temperature type="maximum" units="Fahrenheit" time-layout="k-p24h-n7-2">
+      <name>Daily Maximum Temperature</name>
+        <value>46</value>
+        <value>43</value>
+        <value>40</value>
+        <value>43</value>
+        <value>44</value>
+        <value>46</value>
+        <value>M</value>
+    </temperature>
+
+    <probability-of-precipitation  type="12 hour" units="percent" time-layout="k-p12h-n14-1">
+      <name>12 Hourly Probability of Precipitation</name>
+        <value>20</value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value>30</value>
+        <value>50</value>
+        <value>50</value>
+        <value>50</value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+    </probability-of-precipitation>
+
+    <weather time-layout="k-p12h-n14-1">
+      <name>Weather Type, Coverage, Intensity</name>
+        <weather-conditions weather-summary="Slight Chc Snow"/>
+        <weather-conditions weather-summary="Increasing Clouds"/>
+        <weather-conditions weather-summary="Mostly Cloudy"/>
+        <weather-conditions weather-summary="Scattered Showers"/>
+        <weather-conditions weather-summary="Chance Rain/Snow"/>
+        <weather-conditions weather-summary="Chance Rain/Snow"/>
+        <weather-conditions weather-summary="Chance Rain/Snow"/>
+        <weather-conditions weather-summary="Chance Rain/Snow"/>
+        <weather-conditions weather-summary="Chance Rain/Snow"/>
+        <weather-conditions weather-summary="Chance Rain/Snow"/>
+        <weather-conditions weather-summary="Chance Showers"/>
+        <weather-conditions weather-summary="Rain Likely"/>
+        <weather-conditions weather-summary=""/>
+        <weather-conditions weather-summary=""/>
+    </weather>
+
+    <conditions-icon type="forecast-NWS" time-layout="k-p12h-n14-1">
+      <name>Conditions Icon</name>        <icon-link>http://forecast.weather.gov/images/wtf/medium/nsn20.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/bkn.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nbkn.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/shra30.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nrasn50.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/rasn50.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nrasn50.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/rasn.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nrasn.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/rasn.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nshra.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/ra.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/.png</icon-link>
+    </conditions-icon>
+
+    <wordedForecast time-layout="k-p12h-n14-1" dataSource="afcNetcdf" wordGenerator="markMitchell">
+      <name>Text Forecast</name>
+        <text>A slight chance of snow showers between 7pm and 1am.  Partly cloudy, with a low around 26. Northwest wind around 5 mph becoming calm  in the evening.  Chance of precipitation is 20%.</text>
+        <text>Increasing clouds, with a high near 46. Northeast wind around 5 mph. </text>
+        <text>Mostly cloudy, with a low around 31. North wind 5 to 10 mph. </text>
+        <text>Scattered showers after 1pm.  Partly sunny, with a high near 43. North wind around 5 mph.  Chance of precipitation is 30%.</text>
+        <text>Scattered rain showers before 7pm, then scattered rain and snow showers between 7pm and 1am, then scattered snow showers after 1am.  Cloudy, with a low around 31. Northeast wind around 5 mph becoming calm  in the evening.  Chance of precipitation is 50%.</text>
+        <text>A chance of snow showers before 7am, then a chance of rain and snow showers between 7am and 1pm, then a chance of rain showers after 1pm.  Cloudy, with a high near 40. Chance of precipitation is 50%.</text>
+        <text>A chance of rain showers before 1am, then a chance of snow showers.  Mostly cloudy, with a low around 30. Chance of precipitation is 50%.</text>
+        <text>A chance of rain and snow showers.  Cloudy, with a high near 43.</text>
+        <text>A chance of rain and snow showers.  Cloudy, with a low around 33.</text>
+        <text>A chance of rain and snow showers.  Cloudy, with a high near 44.</text>
+        <text>A chance of showers.  Cloudy, with a low around 35.</text>
+        <text>Rain likely.  Cloudy, with a high near 46.</text>
+        <text></text>
+        <text></text>
+    </wordedForecast>
+
+</parameters>
+</data>
+<data type="current observations">
+	<location>
+		<location-key>point1</location-key>
+		<point latitude="61.17" longitude="-150"/>
+		<area-description>Anchorage, Ted Stevens Anchorage International Airport, AK</area-description>
+		<height datum="mean sea level" height-units="feet">144</height>
+	</location>
+	<moreWeatherInformation applicable-location="point1">http://www.nws.noaa.gov/data/obhistory/PANC.html</moreWeatherInformation>	<time-layout time-coordinate="local">	<layout-key>k-p1h-n1-1</layout-key>	<start-valid-time period-name="current">2015-04-13T16:53:00-08:00</start-valid-time>	</time-layout>	<parameters applicable-location="point1">	<temperature type="apparent" units="Fahrenheit" time-layout="k-p1h-n1-1">	<value>40</value>	</temperature>	<temperature type="dew point" units="Fahrenheit" time-layout="k-p1h-n1-1">	<value>22</value>	</temperature>	<humidity type="relative" time-layout="k-p1h-n1-1">	<value>49</value>	</humidity>	<weather time-layout="k-p1h-n1-1">	<name>Weather Type, Coverage, Intensity</name>	<weather-conditions weather-summary="Partly Cloudy"/>	<weather-conditions>	<value>	<visibility units="statute miles">10.00</visibility>	</value>	</weather-conditions>	</weather>	<conditions-icon type="forecast-NWS" time-layout="k-p1h-n1-1">	<name>Conditions Icon</name>	<icon-link>http://forecast.weather.gov/images/wtf/medium/sct.png</icon-link>	</conditions-icon>	<direction type="wind" units="degrees true" time-layout="k-p1h-n1-1">	<value>290</value>	</direction>	<wind-speed type="gust" units="knots" time-layout="k-p1h-n1-1">	<value>NA</value>	</wind-speed>	<wind-speed type="sustained" units="knots" time-layout="k-p1h-n1-1">	<value>8</value>	</wind-speed>		<pressure type="barometer" units="inches of mercury" time-layout="k-p1h-n1-1">			<value>29.67</value>		</pressure>	</parameters></data></dwml>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<dwml version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd">
+  <head>
+    <product concise-name="dwmlByDay" operational-mode="developmental" srsName="WGS 1984">
+      <creation-date refresh-frequency='PT1H'>2015-04-13T17:30:49-07:00</creation-date>
+     <category>current observations and forecast</category>
+    </product>
+    <source>
+      <production-center>Los Angeles/Oxnard, CA</production-center>
+      <credit>http://www.wrh.noaa.gov/lox</credit>
+      <more-information>http://www.nws.noaa.gov/forecasts/xml/</more-information>
+    </source>
+  </head>
+  <data type="forecast">
+
+  <location>
+    <location-key>point1</location-key>
+    <point latitude="34.08" longitude="-118.39"/>
+    <area-description>4 Miles WSW Hollywood CA</area-description>
+    <height datum="mean sea level" height-units="feet">207</height>
+  </location>
+<moreWeatherInformation applicable-location="point1">http://forecast.weather.gov/MapClick.php?lat=34.08&amp;lon=-118.39</moreWeatherInformation>
+  <time-layout time-coordinate="local" summarization="12hourly">
+    <layout-key>k-p12h-n14-1</layout-key>
+      <start-valid-time period-name="Tonight">2015-04-13T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Tuesday">2015-04-14T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Tuesday Night">2015-04-14T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Wednesday">2015-04-15T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Wednesday Night">2015-04-15T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Thursday">2015-04-16T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Thursday Night">2015-04-16T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Friday">2015-04-17T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Friday Night">2015-04-17T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Saturday">2015-04-18T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Saturday Night">2015-04-18T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Sunday">2015-04-19T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Sunday Night">2015-04-19T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Monday">2015-04-20T06:00:00-07:00</start-valid-time>
+  </time-layout>
+
+  <time-layout time-coordinate="local" summarization="12hourly">
+    <layout-key>k-p24h-n7-1</layout-key>
+      <start-valid-time period-name="Tonight">2015-04-13T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Tuesday Night">2015-04-14T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Wednesday Night">2015-04-15T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Thursday Night">2015-04-16T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Friday Night">2015-04-17T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Saturday Night">2015-04-18T18:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Sunday Night">2015-04-19T18:00:00-07:00</start-valid-time>
+  </time-layout>
+
+  <time-layout time-coordinate="local" summarization="12hourly">
+    <layout-key>k-p24h-n7-2</layout-key>
+      <start-valid-time period-name="Tuesday">2015-04-14T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Wednesday">2015-04-15T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Thursday">2015-04-16T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Friday">2015-04-17T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Saturday">2015-04-18T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Sunday">2015-04-19T06:00:00-07:00</start-valid-time>
+      <start-valid-time period-name="Monday">2015-04-20T06:00:00-07:00</start-valid-time>
+  </time-layout>
+
+
+  <parameters applicable-location="point1">
+
+    <temperature type="minimum" units="Fahrenheit" time-layout="k-p24h-n7-1">
+      <name>Daily Minimum Temperature</name>
+        <value>56</value>
+        <value>52</value>
+        <value>55</value>
+        <value>54</value>
+        <value>55</value>
+        <value>57</value>
+        <value>58</value>
+    </temperature>
+
+    <temperature type="maximum" units="Fahrenheit" time-layout="k-p24h-n7-2">
+      <name>Daily Maximum Temperature</name>
+        <value>72</value>
+        <value>82</value>
+        <value>83</value>
+        <value>81</value>
+        <value>78</value>
+        <value>76</value>
+        <value>75</value>
+    </temperature>
+
+    <probability-of-precipitation  type="12 hour" units="percent" time-layout="k-p12h-n14-1">
+      <name>12 Hourly Probability of Precipitation</name>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+        <value xsi:nil="true"></value>
+    </probability-of-precipitation>
+
+    <weather time-layout="k-p12h-n14-1">
+      <name>Weather Type, Coverage, Intensity</name>
+        <weather-conditions weather-summary="Increasing Clouds"/>
+        <weather-conditions weather-summary="Becoming Sunny"/>
+        <weather-conditions weather-summary="Clear"/>
+        <weather-conditions weather-summary="Sunny"/>
+        <weather-conditions weather-summary="Clear"/>
+        <weather-conditions weather-summary="Sunny"/>
+        <weather-conditions weather-summary="Clear"/>
+        <weather-conditions weather-summary="Sunny"/>
+        <weather-conditions weather-summary="Clear"/>
+        <weather-conditions weather-summary="Sunny"/>
+        <weather-conditions weather-summary="Patchy Fog"/>
+        <weather-conditions weather-summary="Patchy Fog"/>
+        <weather-conditions weather-summary="Partly Cloudy"/>
+        <weather-conditions weather-summary="Mostly Sunny"/>
+    </weather>
+
+    <conditions-icon type="forecast-NWS" time-layout="k-p12h-n14-1">
+      <name>Conditions Icon</name>        <icon-link>http://forecast.weather.gov/images/wtf/medium/nbkn.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/bkn.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nskc.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/skc.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nskc.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/skc.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nskc.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/skc.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nskc.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/skc.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nfg.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/sctfg.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nsct.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/sct.png</icon-link>
+    </conditions-icon>
+
+    <wordedForecast time-layout="k-p12h-n14-1" dataSource="loxNetcdf" wordGenerator="markMitchell">
+      <name>Text Forecast</name>
+        <text>Increasing clouds, with a low around 56. South wind around 5 mph becoming calm  in the evening. </text>
+        <text>Cloudy through mid morning, then gradual clearing, with a high near 72. Light and variable wind becoming west northwest 10 to 15 mph in the afternoon. Winds could gust as high as 25 mph. </text>
+        <text>Clear, with a low around 52. West northwest wind around 15 mph becoming north in the evening. Winds could gust as high as 25 mph. </text>
+        <text>Sunny, with a high near 82. East northeast wind 5 to 15 mph, with gusts as high as 25 mph. </text>
+        <text>Clear, with a low around 55. Northeast wind around 5 mph. </text>
+        <text>Sunny, with a high near 83.</text>
+        <text>Clear, with a low around 54.</text>
+        <text>Sunny, with a high near 81.</text>
+        <text>Clear, with a low around 55.</text>
+        <text>Sunny, with a high near 78.</text>
+        <text>Patchy fog after 11pm.  Otherwise, mostly cloudy, with a low around 57.</text>
+        <text>Patchy fog before 11am.  Otherwise, mostly sunny, with a high near 76.</text>
+        <text>Partly cloudy, with a low around 58.</text>
+        <text>Mostly sunny, with a high near 75.</text>
+    </wordedForecast>
+
+</parameters>
+</data>
+<data type="current observations">
+	<location>
+		<location-key>point1</location-key>
+		<point latitude="34.01583" longitude="-118.45139"/>
+		<area-description>Santa Monica, Santa Monica Municipal Airport, CA</area-description>
+		<height datum="mean sea level" height-units="feet">174</height>
+	</location>
+	<moreWeatherInformation applicable-location="point1">http://www.wrh.noaa.gov/total_forecast/other_obs.php?wfo=lox&amp;zone=CAZ041</moreWeatherInformation>
+    <time-layout time-coordinate="local">	<layout-key>k-p1h-n1-1</layout-key>	<start-valid-time period-name="current">2015-04-13T17:51:00</start-valid-time>	</time-layout>
+    <parameters applicable-location="point1">
+        <temperature type="apparent" units="Fahrenheit" time-layout="k-p1h-n1-1">	<value>64</value>	</temperature>
+
+        <temperature type="dew point" units="Fahrenheit" time-layout="k-p1h-n1-1">	<value>55</value>	</temperature>
+        <humidity type="relative" time-layout="k-p1h-n1-1">	<value>73</value>	</humidity>
+        <weather time-layout="k-p1h-n1-1">
+            <name>Weather Type, Coverage, Intensity</name>
+            <weather-conditions weather-summary="Fair"/>
+            <weather-conditions>
+                <value>	<visibility units="statute miles">10.00</visibility>	</value>
+            </weather-conditions>
+        </weather>
+        <conditions-icon type="forecast-NWS" time-layout="k-p1h-n1-1">
+            <name>Conditions Icon</name>
+            <icon-link>http://forecast.weather.gov/images/wtf/medium/sct.png</icon-link>
+        </conditions-icon>
+        <direction type="wind" units="degrees true" time-layout="k-p1h-n1-1">	<value>220</value>	</direction>
+        <wind-speed type="gust" units="knots" time-layout="k-p1h-n1-1">	<value>NA</value>	</wind-speed>
+        <wind-speed type="sustained" units="knots" time-layout="k-p1h-n1-1">	<value>8</value>	</wind-speed>
+        <pressure type="barometer" units="inches of mercury" time-layout="k-p1h-n1-1">			<value>30.03</value>		</pressure>
+    </parameters>
+</data>
+</dwml>

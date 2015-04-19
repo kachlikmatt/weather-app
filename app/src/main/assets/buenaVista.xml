@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<dwml version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd">
+  <head>
+    <product concise-name="dwmlByDay" operational-mode="developmental" srsName="WGS 1984">
+      <creation-date refresh-frequency='PT1H'>2015-04-13T20:14:43-04:00</creation-date>
+     <category>current observations and forecast</category>
+    </product>
+    <source>
+      <production-center>Melbourne, FL</production-center>
+      <credit>http://www.srh.noaa.gov/mlb</credit>
+      <more-information>http://www.nws.noaa.gov/forecasts/xml/</more-information>
+    </source>
+  </head>
+  <data type="forecast">
+
+  <location>
+    <location-key>point1</location-key>
+    <point latitude="28.37" longitude="-81.56"/>
+    <area-description>2 Miles WSW Lake Buena Vista FL</area-description>
+    <height datum="mean sea level" height-units="feet">92</height>
+  </location>
+<moreWeatherInformation applicable-location="point1">http://forecast.weather.gov/MapClick.php?lat=28.37&amp;lon=-81.56</moreWeatherInformation>
+  <time-layout time-coordinate="local" summarization="12hourly">
+    <layout-key>k-p12h-n14-1</layout-key>
+      <start-valid-time period-name="Tonight">2015-04-13T18:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Tuesday">2015-04-14T06:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Tuesday Night">2015-04-14T18:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Wednesday">2015-04-15T06:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Wednesday Night">2015-04-15T18:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Thursday">2015-04-16T06:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Thursday Night">2015-04-16T18:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Friday">2015-04-17T06:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Friday Night">2015-04-17T18:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Saturday">2015-04-18T06:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Saturday Night">2015-04-18T18:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Sunday">2015-04-19T06:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Sunday Night">2015-04-19T18:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Monday">2015-04-20T06:00:00-04:00</start-valid-time>
+  </time-layout>
+
+  <time-layout time-coordinate="local" summarization="12hourly">
+    <layout-key>k-p24h-n7-1</layout-key>
+      <start-valid-time period-name="Tonight">2015-04-13T18:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Tuesday Night">2015-04-14T18:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Wednesday Night">2015-04-15T18:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Thursday Night">2015-04-16T18:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Friday Night">2015-04-17T18:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Saturday Night">2015-04-18T18:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Sunday Night">2015-04-19T18:00:00-04:00</start-valid-time>
+  </time-layout>
+
+  <time-layout time-coordinate="local" summarization="12hourly">
+    <layout-key>k-p24h-n7-2</layout-key>
+      <start-valid-time period-name="Tuesday">2015-04-14T06:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Wednesday">2015-04-15T06:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Thursday">2015-04-16T06:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Friday">2015-04-17T06:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Saturday">2015-04-18T06:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Sunday">2015-04-19T06:00:00-04:00</start-valid-time>
+      <start-valid-time period-name="Monday">2015-04-20T06:00:00-04:00</start-valid-time>
+  </time-layout>
+
+
+  <parameters applicable-location="point1">
+
+    <temperature type="minimum" units="Fahrenheit" time-layout="k-p24h-n7-1">
+      <name>Daily Minimum Temperature</name>
+        <value>69</value>
+        <value>70</value>
+        <value>70</value>
+        <value>71</value>
+        <value>70</value>
+        <value>69</value>
+        <value>70</value>
+    </temperature>
+
+    <temperature type="maximum" units="Fahrenheit" time-layout="k-p24h-n7-2">
+      <name>Daily Maximum Temperature</name>
+        <value>88</value>
+        <value>88</value>
+        <value>86</value>
+        <value>87</value>
+        <value>87</value>
+        <value>87</value>
+        <value>85</value>
+    </temperature>
+
+    <probability-of-precipitation  type="12 hour" units="percent" time-layout="k-p12h-n14-1">
+      <name>12 Hourly Probability of Precipitation</name>
+        <value>50</value>
+        <value>50</value>
+        <value>50</value>
+        <value>50</value>
+        <value>40</value>
+        <value>70</value>
+        <value>30</value>
+        <value>40</value>
+        <value>30</value>
+        <value>30</value>
+        <value>20</value>
+        <value>40</value>
+        <value>30</value>
+        <value>50</value>
+    </probability-of-precipitation>
+
+    <weather time-layout="k-p12h-n14-1">
+      <name>Weather Type, Coverage, Intensity</name>
+        <weather-conditions weather-summary="Chance Thunderstorms"/>
+        <weather-conditions weather-summary="Scattered Thunderstorms"/>
+        <weather-conditions weather-summary="Scattered Thunderstorms"/>
+        <weather-conditions weather-summary="Scattered Thunderstorms"/>
+        <weather-conditions weather-summary="Chance Thunderstorms"/>
+        <weather-conditions weather-summary="Thunderstorms Likely"/>
+        <weather-conditions weather-summary="Chance Thunderstorms"/>
+        <weather-conditions weather-summary="Chance Thunderstorms"/>
+        <weather-conditions weather-summary="Chance Thunderstorms"/>
+        <weather-conditions weather-summary="Chance Thunderstorms"/>
+        <weather-conditions weather-summary="Slight Chc Thunderstorms"/>
+        <weather-conditions weather-summary="Chance Thunderstorms"/>
+        <weather-conditions weather-summary="Chance Thunderstorms"/>
+        <weather-conditions weather-summary="Chance Thunderstorms"/>
+    </weather>
+
+    <conditions-icon type="forecast-NWS" time-layout="k-p12h-n14-1">
+      <name>Conditions Icon</name>        <icon-link>http://forecast.weather.gov/images/wtf/medium/nscttsra50.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/scttsra50.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nscttsra50.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/scttsra50.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/ntsra40.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/tsra70.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/ntsra30.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/tsra40.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/ntsra30.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/scttsra30.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/nscttsra20.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/scttsra40.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/ntsra30.png</icon-link>
+        <icon-link>http://forecast.weather.gov/images/wtf/medium/tsra50.png</icon-link>
+    </conditions-icon>
+
+    <wordedForecast time-layout="k-p12h-n14-1" dataSource="mlbNetcdf" wordGenerator="markMitchell">
+      <name>Text Forecast</name>
+        <text>A 50 percent chance of showers and thunderstorms before midnight.  Mostly cloudy, with a low around 69. South southeast wind around 5 mph. </text>
+        <text>Scattered showers and thunderstorms after 11am.  Partly sunny, with a high near 88. South wind 5 to 10 mph.  Chance of precipitation is 50%.</text>
+        <text>Scattered showers and thunderstorms before midnight.  Mostly cloudy, with a low around 70. Southeast wind around 5 mph becoming calm  in the evening.  Chance of precipitation is 50%.</text>
+        <text>Scattered showers and thunderstorms after noon.  Partly sunny, with a high near 88. South southeast wind 5 to 10 mph.  Chance of precipitation is 50%.</text>
+        <text>A 40 percent chance of showers and thunderstorms before midnight.  Mostly cloudy, with a low around 70. Northeast wind around 5 mph becoming southeast after midnight. </text>
+        <text>Showers and thunderstorms likely after 11am.  Mostly cloudy, with a high near 86. Southeast wind around 5 mph.  Chance of precipitation is 70%.</text>
+        <text>A 30 percent chance of showers and thunderstorms before midnight.  Mostly cloudy, with a low around 71. East northeast wind around 5 mph becoming calm. </text>
+        <text>A 40 percent chance of showers and thunderstorms.  Mostly cloudy, with a high near 87. Calm wind becoming south around 5 mph. </text>
+        <text>A 30 percent chance of showers and thunderstorms.  Mostly cloudy, with a low around 70. Calm wind. </text>
+        <text>A 30 percent chance of showers and thunderstorms.  Partly sunny, with a high near 87. Calm wind becoming south southwest around 5 mph in the morning. </text>
+        <text>A 20 percent chance of showers and thunderstorms.  Mostly cloudy, with a low around 69. West southwest wind around 5 mph becoming calm  in the evening. </text>
+        <text>A 40 percent chance of showers and thunderstorms.  Partly sunny, with a high near 87. South southeast wind around 5 mph. </text>
+        <text>A 30 percent chance of showers and thunderstorms.  Mostly cloudy, with a low around 70. Calm wind. </text>
+        <text>A 50 percent chance of showers and thunderstorms.  Mostly cloudy, with a high near 85. West wind 5 to 10 mph. </text>
+    </wordedForecast>
+
+</parameters>
+</data>
+<data type="current observations">
+	<location>
+		<location-key>point1</location-key>
+		<point latitude="28.29" longitude="-81.44"/>
+		<area-description>Orlando, Kissimmee Municipal Airport, FL</area-description>
+		<height datum="mean sea level" height-units="feet">82</height>
+	</location>
+	<moreWeatherInformation applicable-location="point1">http://www.nws.noaa.gov/data/obhistory/KISM.html</moreWeatherInformation>	<time-layout time-coordinate="local">	<layout-key>k-p1h-n1-1</layout-key>	<start-valid-time period-name="current">2015-04-13T20:50:00-04:00</start-valid-time>	</time-layout>	<parameters applicable-location="point1">	<temperature type="apparent" units="Fahrenheit" time-layout="k-p1h-n1-1">	<value>73</value>	</temperature>	<temperature type="dew point" units="Fahrenheit" time-layout="k-p1h-n1-1">	<value>72</value>	</temperature>	<humidity type="relative" time-layout="k-p1h-n1-1">	<value>94</value>	</humidity>	<weather time-layout="k-p1h-n1-1">	<name>Weather Type, Coverage, Intensity</name>	<weather-conditions weather-summary="Mostly Cloudy"/>	<weather-conditions>	<value>	<visibility units="statute miles">10.00</visibility>	</value>	</weather-conditions>	</weather>	<conditions-icon type="forecast-NWS" time-layout="k-p1h-n1-1">	<name>Conditions Icon</name>	<icon-link>http://forecast.weather.gov/images/wtf/medium/nbkn.png</icon-link>	</conditions-icon>	<direction type="wind" units="degrees true" time-layout="k-p1h-n1-1">	<value>100</value>	</direction>	<wind-speed type="gust" units="knots" time-layout="k-p1h-n1-1">	<value>NA</value>	</wind-speed>	<wind-speed type="sustained" units="knots" time-layout="k-p1h-n1-1">	<value>10</value>	</wind-speed>		<pressure type="barometer" units="inches of mercury" time-layout="k-p1h-n1-1">			<value>30.18</value>		</pressure>	</parameters></data></dwml>
