@@ -9,13 +9,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 
 
 public class WeatherActivity extends ActionBarActivity {
 
-
+    final WeatherXmlParser parser = new WeatherXmlParser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -34,6 +36,8 @@ public class WeatherActivity extends ActionBarActivity {
                     assetChooser(zip);
                 } catch (IOException e) {
                     e.printStackTrace();
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -44,8 +48,7 @@ public class WeatherActivity extends ActionBarActivity {
     finds which assest the user wants
     based off zipcode then parses that file
      */
-    public void assetChooser(String zipCode) throws IOException
-    {
+    public void assetChooser(String zipCode) throws IOException, XmlPullParserException {
 
         String city = "";
         final String BUENAVISTA = "buenaVista";
@@ -77,7 +80,9 @@ public class WeatherActivity extends ActionBarActivity {
         }
         city += ".xml";
         AssetManager assetManager = getAssets();
-        InputStreamReader in = new InputStreamReader(assetManager.open(city));
+        InputStream in = assetManager.open(city);
+       
+        parser.parse(in);
     }
 
     @Override
