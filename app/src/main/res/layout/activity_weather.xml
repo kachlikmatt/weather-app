@@ -41,38 +41,40 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="33dp">
+            android:layout_height="33dp"
+            android:weightSum="1">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="current Location:"
                 android:id="@+id/curLocationLBL" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="90dp"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/currLocation"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.86" />
 
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="fill_parent"
+            android:layout_width="135dp"
             android:layout_height="41dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="147dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Current Time:"
                 android:id="@+id/currTimeLBL" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/currTime" />
@@ -81,7 +83,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="99dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:weightSum="1">
 
@@ -96,7 +98,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="39dp">
+                android:layout_height="39dp"
+                android:weightSum="1">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -107,10 +110,11 @@
                     android:layout_gravity="center_horizontal" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/currCondition" />
+                    android:id="@+id/currCondition"
+                    android:layout_weight="0.87" />
             </LinearLayout>
 
         </LinearLayout>
@@ -120,19 +124,30 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="metric"
-                android:id="@+id/metricRB"
-                android:checked="false" />
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/weatherGroup"
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:layout_width="108dp"
-                android:layout_height="wrap_content"
-                android:text="imperical"
-                android:id="@+id/impericalRB"
-                android:checked="true" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="imperical"
+                    android:id="@+id/impericalRB"
+                    android:checked="true"
+                    android:clickable="true"
+                    android:onClick="onRadioButtonClicked"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="metric"
+                    android:id="@+id/metricRb"
+                    android:clickable="true"
+                    android:checked="false"
+                    android:onClick="onRadioButtonClicked"/>
+            </RadioGroup>
 
         </LinearLayout>
 

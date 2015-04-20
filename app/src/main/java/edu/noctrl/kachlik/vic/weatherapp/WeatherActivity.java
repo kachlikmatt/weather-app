@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -24,13 +26,12 @@ public class WeatherActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         final Button button = (Button) findViewById(R.id.goBTN);
-        button.setOnClickListener(new View.OnClickListener()
-        {
+
+        button.setOnClickListener(new View.OnClickListener() {
 
 
-            public void onClick(View v)
-            {
-                EditText mEdit   = (EditText)findViewById(R.id.zipField);
+            public void onClick(View v) {
+                EditText mEdit = (EditText) findViewById(R.id.zipField);
                 String zip = mEdit.getText().toString();
                 try {
                     assetChooser(zip);
@@ -42,6 +43,26 @@ public class WeatherActivity extends ActionBarActivity {
             }
         });
     }
+        public void onRadioButtonClicked(View view) {
+            // Is the button now checked?
+            boolean checked = ((RadioButton) view).isChecked();
+
+            // Check which radio button was clicked
+            switch(view.getId()) {
+                case R.id.metricRb:
+                    if (checked)
+                        Toast.makeText(getApplicationContext(), "metric",
+                                Toast.LENGTH_LONG).show();
+                        break;
+                case R.id.impericalRB:
+                    if (checked)
+                        Toast.makeText(getApplicationContext(), "imperical",
+                                Toast.LENGTH_LONG).show();
+                        break;
+            }
+        }
+
+
     /*
 
     assetChooser
@@ -81,9 +102,10 @@ public class WeatherActivity extends ActionBarActivity {
         city += ".xml";
         AssetManager assetManager = getAssets();
         InputStream in = assetManager.open(city);
-       
+
         parser.parse(in);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
