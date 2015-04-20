@@ -1,19 +1,84 @@
 package edu.noctrl.kachlik.vic.weatherapp;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 
 public class WeatherActivity extends ActionBarActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
-    }
+        final Button button = (Button) findViewById(R.id.goBTN);
+        button.setOnClickListener(new View.OnClickListener()
+        {
 
+
+            public void onClick(View v)
+            {
+                EditText mEdit   = (EditText)findViewById(R.id.zipField);
+                String zip = mEdit.getText().toString();
+                try {
+                    assetChooser(zip);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+    /*
+
+    assetChooser
+    finds which assest the user wants
+    based off zipcode then parses that file
+     */
+    public void assetChooser(String zipCode) throws IOException
+    {
+
+        String city = "";
+        final String BUENAVISTA = "buenaVista";
+        final String FORTWAYNE = "fortWayne";
+        final String HOLLYWOOD = "hollywood";
+        final String LINCOLNWOOD = "lincolnwood";
+        final String MERRILFIELD = "merrilField";
+
+
+        if(zipCode.equals("32880"))
+        {
+            city = BUENAVISTA;
+        }
+        else if(zipCode.equals("46825"))
+        {
+            city = FORTWAYNE;
+        }
+        else if(zipCode.equals("90210"))
+        {
+            city = HOLLYWOOD;
+        }
+        else if(zipCode.equals("60640"))
+        {
+            city = LINCOLNWOOD;
+        }
+        else
+        {
+            city = MERRILFIELD;
+        }
+        city += ".xml";
+        AssetManager assetManager = getAssets();
+        InputStreamReader in = new InputStreamReader(assetManager.open(city));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

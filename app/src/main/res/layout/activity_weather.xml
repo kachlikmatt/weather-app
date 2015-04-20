@@ -24,10 +24,11 @@
                 android:id="@+id/zipCodeLB" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="139dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/zipField"
-                android:layout_weight="0.72" />
+                android:inputType="date"
+                android:ems="10"
+                android:id="@+id/zipField" />
 
             <Button
                 android:layout_width="75dp"
@@ -181,7 +182,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/visibility" />
+                    android:id="@+id/visibility"
+                    android:layout_column="2" />
             </TableRow>
 
             <TableRow
@@ -218,7 +220,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/windSpeed" />
+                    android:id="@+id/windSpeed"
+                    android:layout_column="2" />
             </TableRow>
 
             <TableRow
@@ -255,7 +258,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/gusts" />
+                    android:id="@+id/gusts"
+                    android:layout_column="2" />
             </TableRow>
 
             <TableRow
