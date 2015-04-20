@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -61,7 +62,45 @@ public class WeatherActivity extends ActionBarActivity {
                         break;
             }
         }
+    //converts from imperial to metric
+    private void  metricConverter()
+    {
+        double temp = R.id.temp;
+        double dewPoint = R.id.dewPointTemp;
+        double visibility = R.id.visibility;
+        double windSpeed = R.id.windSpeed;
+        double gusts = R.id.gusts;
+        double pressure = R.id.pressure;
 
+        temp = temp -32 * (5.0/9.0);
+        dewPoint = dewPoint -32 * (5.0/9.0);
+        visibility = visibility * 1.6;
+        windSpeed = windSpeed * 1.6;
+        gusts = gusts * 1.6;
+        pressure = pressure * 25.4;
+        
+        TextView t =  (TextView)findViewById(R.id.temp);
+        t.setText(temp + "");
+
+        t = (TextView)findViewById(R.id.dewPointTemp);
+        t.setText(dewPoint + "");
+        t =  (TextView)findViewById(R.id.visibility);
+        t.setText(visibility + "");
+        t = (TextView)findViewById(R.id.windSpeed);
+        t.setText(windSpeed + "");
+        t = (TextView)findViewById(R.id.gusts);
+        t.setText(gusts + "");
+        t =  (TextView)findViewById(R.id.pressure);
+        t.setText(pressure + "");
+
+
+
+    }
+    //uses saved values from xml to be placed back
+    private void imperialConverter()
+    {
+
+    }
 
     /*
 
