@@ -3,6 +3,7 @@ package edu.noctrl.kachlik.vic.weatherapp;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -142,7 +143,13 @@ public class WeatherActivity extends ActionBarActivity {
         AssetManager assetManager = getAssets();
         InputStream in = assetManager.open(city);
 
-        parser.parse(in);
+        Log.i("WeatherActivity", "value of city is " + city);
+
+        WeatherXmlParser.Entry weatherEntry = (WeatherXmlParser.Entry) parser.parse(in).get(0);
+
+        Toast.makeText(getApplicationContext(), weatherEntry.areaDescription,
+                Toast.LENGTH_LONG).show();
+
     }
 
 
