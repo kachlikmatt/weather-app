@@ -52,7 +52,6 @@ public class WeatherXmlParser {
 
                 if (type.equals("current observations"))
                 {
-                    Log.i("MyActivity", "entered if current obs loop");
                     entries.add(readEntry(parser));
                 }
                 else
@@ -64,7 +63,6 @@ public class WeatherXmlParser {
             }
 
         }
-        Log.i("MyActivity", "list size is " + entries.size() );
         return entries;
     }
 

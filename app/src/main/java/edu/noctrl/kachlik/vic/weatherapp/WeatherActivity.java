@@ -3,7 +3,6 @@ package edu.noctrl.kachlik.vic.weatherapp;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -22,6 +20,7 @@ import java.io.InputStream;
 public class WeatherActivity extends ActionBarActivity {
 
     final WeatherXmlParser parser = new WeatherXmlParser();
+    WeatherXmlParser.Entry weatherEntry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -53,46 +52,47 @@ public class WeatherActivity extends ActionBarActivity {
             switch(view.getId()) {
                 case R.id.metricRb:
                     if (checked)
-                        Toast.makeText(getApplicationContext(), "metric",
-                                Toast.LENGTH_LONG).show();
+                        metricConverter();
                         break;
                 case R.id.impericalRB:
                     if (checked)
-                        Toast.makeText(getApplicationContext(), "imperical",
-                                Toast.LENGTH_LONG).show();
+                        imperialConverter();
                         break;
             }
         }
     //converts from imperial to metric
     private void  metricConverter()
     {
-        double temp = R.id.temp;
-        double dewPoint = R.id.dewPointTemp;
-        double visibility = R.id.visibility;
-        double windSpeed = R.id.windSpeed;
-        double gusts = R.id.gusts;
-        double pressure = R.id.pressure;
+        int temp = weatherEntry.temperature;
+        int dewPoint = weatherEntry.dewPoint;
+        double visibility = weatherEntry.visibility;
+        double windSpeed = weatherEntry.windSpeed;
+        double gusts = weatherEntry.gustSpeed;
+        double pressure = weatherEntry.pressure;
+        int humidity = weatherEntry.humidity;
 
-        temp = temp -32 * (5.0/9.0);
-        dewPoint = dewPoint -32 * (5.0/9.0);
+        temp = temp -32 * (5/9);
+        dewPoint = dewPoint -32 * (5/9);
         visibility = visibility * 1.6;
         windSpeed = windSpeed * 1.6;
         gusts = gusts * 1.6;
         pressure = pressure * 25.4;
         
         TextView t =  (TextView)findViewById(R.id.temp);
-        t.setText(temp + "");
+        t.setText(temp + "C");
 
         t = (TextView)findViewById(R.id.dewPointTemp);
-        t.setText(dewPoint + "");
+        t.setText(dewPoint + "C");
         t =  (TextView)findViewById(R.id.visibility);
-        t.setText(visibility + "");
+        t.setText(visibility + "km");
         t = (TextView)findViewById(R.id.windSpeed);
-        t.setText(windSpeed + "");
+        t.setText(weatherEntry.windDirection+" @ " +windSpeed + "kmh");
         t = (TextView)findViewById(R.id.gusts);
-        t.setText(gusts + "");
+        t.setText(gusts + "kmh");
         t =  (TextView)findViewById(R.id.pressure);
-        t.setText(pressure + "");
+        t.setText(pressure + "mm");
+        t =  (TextView)findViewById(R.id.humidity);
+        t.setText(humidity + "%");
 
 
 
@@ -100,7 +100,29 @@ public class WeatherActivity extends ActionBarActivity {
     //uses saved values from xml to be placed back
     private void imperialConverter()
     {
+        int temp = weatherEntry.temperature;
+        int dewPoint = weatherEntry.dewPoint;
+        double visibility = weatherEntry.visibility;
+        double windSpeed = weatherEntry.windSpeed;
+        double gusts = weatherEntry.gustSpeed;
+        double pressure = weatherEntry.pressure;
+        int humidity = weatherEntry.humidity;
 
+        TextView t =  (TextView)findViewById(R.id.temp);
+        t.setText(temp + "F");
+
+        t = (TextView)findViewById(R.id.dewPointTemp);
+        t.setText(dewPoint + "F");
+        t =  (TextView)findViewById(R.id.visibility);
+        t.setText(visibility + "mi");
+        t = (TextView)findViewById(R.id.windSpeed);
+        t.setText(weatherEntry.windDirection+" @ " + windSpeed + "mph");
+        t = (TextView)findViewById(R.id.gusts);
+        t.setText(gusts + "mph");
+        t =  (TextView)findViewById(R.id.pressure);
+        t.setText(pressure + "in");
+        t =  (TextView)findViewById(R.id.humidity);
+        t.setText(humidity + "%");
     }
 
     /*
@@ -143,13 +165,13 @@ public class WeatherActivity extends ActionBarActivity {
         AssetManager assetManager = getAssets();
         InputStream in = assetManager.open(city);
 
-        Log.i("WeatherActivity", "value of city is " + city);
 
-        WeatherXmlParser.Entry weatherEntry = (WeatherXmlParser.Entry) parser.parse(in).get(0);
+         weatherEntry = (WeatherXmlParser.Entry) parser.parse(in).get(0);
 
-        //to access weather entry properties just use weatherEntry.[property]
-        Toast.makeText(getApplicationContext(), weatherEntry.areaDescription,
-                Toast.LENGTH_LONG).show();
+        TextView t =  (TextView)findViewById(R.id.currCondition);
+        t.setText(weatherEntry.currentCondition);
+        t =  (TextView)findViewById(R.id.currTime);
+        metricConverter();
     }
 
 
