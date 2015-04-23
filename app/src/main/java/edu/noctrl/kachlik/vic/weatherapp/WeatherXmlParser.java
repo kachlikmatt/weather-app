@@ -70,8 +70,8 @@ public class WeatherXmlParser {
     {
         public final String areaDescription;
         public final String currentCondition;
-        public final Integer temperature;
-        public final Integer dewPoint;
+        public final Double temperature;
+        public final Double dewPoint;
         public final Integer humidity;
         public final Double pressure;
         public final Integer visibility;
@@ -79,8 +79,8 @@ public class WeatherXmlParser {
         public final String windDirection;
         public final Integer gustSpeed;
 
-        private Entry(String areaDescription, String currentCondition, Integer temperature,
-                      Integer dewPoint, Integer humidity, Double pressure, Integer visibility,
+        private Entry(String areaDescription, String currentCondition, Double temperature,
+                      Double dewPoint, Integer humidity, Double pressure, Integer visibility,
                       Integer windSpeed, String windDirection, Integer gustSpeed)
         {
             this.areaDescription = areaDescription;
@@ -105,14 +105,16 @@ public class WeatherXmlParser {
                tagType = null,
                name = null;
 
-        Integer temperature = null,
-                dewPoint = null,
+        Integer
                 humidity = null,
                 visibility = null,
                 windSpeed = null,
                 gustSpeed = null;
 
-        Double pressure = null;
+
+        Double pressure = null,
+              temperature = null,
+                dewPoint = null;
 
         Log.i("MyActivity", "entered read entry");
         parser.require(XmlPullParser.START_TAG, ns, "data");
@@ -224,23 +226,23 @@ public class WeatherXmlParser {
         return humidity;
     }
 
-    private Integer readDewPoint(XmlPullParser parser) throws IOException, XmlPullParserException {
-        Integer dewPoint = 0;
+    private Double readDewPoint(XmlPullParser parser) throws IOException, XmlPullParserException {
+        Double dewPoint = 0.0;
         parser.require(XmlPullParser.START_TAG, ns, "temperature");
         String tagType = parser.getAttributeValue(null, "type");
         nextStartTag(parser); //move to the inner value tag
         parser.require(XmlPullParser.START_TAG, ns, "value");
-        dewPoint = Integer.parseInt(readText(parser));
+        dewPoint = Double.parseDouble(readText(parser));
         return dewPoint;
     }
 
-    private Integer readTemperature(XmlPullParser parser) throws IOException, XmlPullParserException {
-        Integer temperature = null;
+    private Double readTemperature(XmlPullParser parser) throws IOException, XmlPullParserException {
+        Double temperature = null;
         parser.require(XmlPullParser.START_TAG, ns, "temperature");
         String tagType = parser.getAttributeValue(null, "type");
         nextStartTag(parser);
         parser.require(XmlPullParser.START_TAG, ns, "value");
-        temperature = Integer.parseInt(readText(parser));
+        temperature = Double.parseDouble(readText(parser));
         return temperature;
     }
 

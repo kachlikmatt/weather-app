@@ -15,6 +15,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Calendar;
 
 
 public class WeatherActivity extends ActionBarActivity {
@@ -63,16 +64,36 @@ public class WeatherActivity extends ActionBarActivity {
     //converts from imperial to metric
     private void  metricConverter()
     {
-        int temp = weatherEntry.temperature;
-        int dewPoint = weatherEntry.dewPoint;
+        double temp = weatherEntry.temperature;
+        double dewPoint = weatherEntry.dewPoint;
         double visibility = weatherEntry.visibility;
         double windSpeed = weatherEntry.windSpeed;
         double gusts = weatherEntry.gustSpeed;
         double pressure = weatherEntry.pressure;
         int humidity = weatherEntry.humidity;
 
-        temp = temp -32 * (5/9);
-        dewPoint = dewPoint -32 * (5/9);
+        String windD = "";
+        int xmlWindD = Integer.parseInt(weatherEntry.windDirection);
+        if(xmlWindD <= 360 && xmlWindD >= 271)
+        {
+            windD = "N";
+        }
+        else if(xmlWindD <= 270 && xmlWindD >= 181)
+        {
+            windD = "W";
+        }
+        else if (xmlWindD <= 180 && xmlWindD >= 90)
+        {
+            windD = "S";
+        }
+        else
+        {
+            windD = "E";
+        }
+
+
+        temp = (temp -32) * (5/9.0);
+        dewPoint = (dewPoint -32) * (5/9.0);
         visibility = visibility * 1.6;
         windSpeed = windSpeed * 1.6;
         gusts = gusts * 1.6;
@@ -86,7 +107,7 @@ public class WeatherActivity extends ActionBarActivity {
         t =  (TextView)findViewById(R.id.visibility);
         t.setText(visibility + "km");
         t = (TextView)findViewById(R.id.windSpeed);
-        t.setText(weatherEntry.windDirection+" @ " +windSpeed + "kmh");
+        t.setText(windD+" @ " +windSpeed + "kmh");
         t = (TextView)findViewById(R.id.gusts);
         t.setText(gusts + "kmh");
         t =  (TextView)findViewById(R.id.pressure);
@@ -96,17 +117,36 @@ public class WeatherActivity extends ActionBarActivity {
 
 
 
+
     }
     //uses saved values from xml to be placed back
     private void imperialConverter()
     {
-        int temp = weatherEntry.temperature;
-        int dewPoint = weatherEntry.dewPoint;
+        double temp = weatherEntry.temperature;
+        double dewPoint = weatherEntry.dewPoint;
         double visibility = weatherEntry.visibility;
         double windSpeed = weatherEntry.windSpeed;
         double gusts = weatherEntry.gustSpeed;
         double pressure = weatherEntry.pressure;
         int humidity = weatherEntry.humidity;
+        String windD = "";
+        int xmlWindD = Integer.parseInt(weatherEntry.windDirection);
+        if(xmlWindD <= 360 && xmlWindD >= 271)
+        {
+            windD = "N";
+        }
+        else if(xmlWindD <= 270 && xmlWindD >= 181)
+        {
+            windD = "W";
+        }
+        else if (xmlWindD <= 180 && xmlWindD >= 90)
+        {
+            windD = "S";
+        }
+        else
+        {
+            windD = "E";
+        }
 
         TextView t =  (TextView)findViewById(R.id.temp);
         t.setText(temp + "F");
@@ -116,13 +156,21 @@ public class WeatherActivity extends ActionBarActivity {
         t =  (TextView)findViewById(R.id.visibility);
         t.setText(visibility + "mi");
         t = (TextView)findViewById(R.id.windSpeed);
-        t.setText(weatherEntry.windDirection+" @ " + windSpeed + "mph");
+
+        t.setText(windD+" @ " + windSpeed + "mph");
         t = (TextView)findViewById(R.id.gusts);
         t.setText(gusts + "mph");
         t =  (TextView)findViewById(R.id.pressure);
         t.setText(pressure + "in");
         t =  (TextView)findViewById(R.id.humidity);
         t.setText(humidity + "%");
+        t =  (TextView)findViewById(R.id.currCondition);
+        t.setText(weatherEntry.currentCondition + "blank");
+        t= (TextView)findViewById(R.id.currLocation);
+        t.setText((CharSequence) weatherEntry.areaDescription);
+        t =  (TextView)findViewById(R.id.currTime);
+        Calendar rightNow = Calendar.getInstance();
+        t.setText(rightNow.getTime() + "");
     }
 
     /*
@@ -168,10 +216,8 @@ public class WeatherActivity extends ActionBarActivity {
 
          weatherEntry = (WeatherXmlParser.Entry) parser.parse(in).get(0);
 
-        TextView t =  (TextView)findViewById(R.id.currCondition);
-        t.setText(weatherEntry.currentCondition);
-        t =  (TextView)findViewById(R.id.currTime);
-        metricConverter();
+
+        imperialConverter();
     }
 
 
