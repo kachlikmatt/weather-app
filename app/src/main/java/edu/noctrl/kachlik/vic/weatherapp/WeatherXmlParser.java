@@ -1,5 +1,6 @@
 package edu.noctrl.kachlik.vic.weatherapp;
 
+import android.util.Log;
 import android.util.Xml;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Double;
 
 /**
  * Created on 4/18/2015.
@@ -21,6 +23,7 @@ public class WeatherXmlParser {
     public List parse(InputStream in) throws XmlPullParserException, IOException {
         try
         {
+            Log.i("MyActivity", "entered parse method.");
             XmlPullParser parser = Xml.newPullParser();
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
             parser.setInput(in, null);
@@ -33,10 +36,11 @@ public class WeatherXmlParser {
 
     private List readFeed(XmlPullParser parser) throws XmlPullParserException, IOException
     {
+        Log.i("MyActivity", "entered readFeed()");
         List entries = new ArrayList();
 
         parser.require(XmlPullParser.START_TAG, ns, "dwml");
-        while (parser.next() != XmlPullParser.END_TAG)
+        while (parser.next() != XmlPullParser.END_TAG && parser.getEventType() != XmlPullParser.END_DOCUMENT)
         {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
@@ -45,29 +49,22 @@ public class WeatherXmlParser {
             if (name.equals("data"))
             {
                 String type = parser.getAttributeValue(null, "type");
+
                 if (type.equals("current observations"))
+                {
+                    Log.i("MyActivity", "entered if current obs loop");
                     entries.add(readEntry(parser));
+                }
+                else
+                    skip(parser);
+
             } else
             {
                 skip(parser);
             }
 
-            /*String link = "";
-            parser.require(XmlPullParser.START_TAG, ns, "link");
-            String tag = parser.getName();
-            String relType = parser.getAttributeValue(null, "rel");
-            if (tag.equals("link")) {
-                if (relType.equals("alternate")){
-                    link = parser.getAttributeValue(null, "href");
-                    parser.nextTag();
-                }
-            }
-            parser.require(XmlPullParser.END_TAG, ns, "link");
-            return link;*/
-
-
-
         }
+        Log.i("MyActivity", "list size is " + entries.size() );
         return entries;
     }
 
@@ -78,14 +75,14 @@ public class WeatherXmlParser {
         public final Integer temperature;
         public final Integer dewPoint;
         public final Integer humidity;
-        public final Integer pressure;
+        public final Double pressure;
         public final Integer visibility;
         public final Integer windSpeed;
         public final String windDirection;
         public final Integer gustSpeed;
 
         private Entry(String areaDescription, String currentCondition, Integer temperature,
-                      Integer dewPoint, Integer humidity, Integer pressure, Integer visibility,
+                      Integer dewPoint, Integer humidity, Double pressure, Integer visibility,
                       Integer windSpeed, String windDirection, Integer gustSpeed)
         {
             this.areaDescription = areaDescription;
@@ -104,30 +101,38 @@ public class WeatherXmlParser {
     // Parses the contents of a data tag. If it encounters the desired tags, hands them off
     // to their respective "read" methods for processing. Otherwise, skips the tag.
     private Entry readEntry(XmlPullParser parser) throws XmlPullParserException, IOException {
-        parser.require(XmlPullParser.START_TAG, ns, "data");
-
         String areaDescription = null,
                currentCondition = null,
-               windDirection = null;
+               windDirection = null,
+               tagType = null,
+               name = null;
 
         Integer temperature = null,
                 dewPoint = null,
                 humidity = null,
-                pressure = null,
                 visibility = null,
                 windSpeed = null,
                 gustSpeed = null;
 
-        while (parser.next() != XmlPullParser.END_TAG)
+        Double pressure = null;
+
+        Log.i("MyActivity", "entered read entry");
+        parser.require(XmlPullParser.START_TAG, ns, "data");
+        nextStartTag(parser);
+
+        while (parser.getEventType() != XmlPullParser.END_DOCUMENT)
         {
-            if (parser.getEventType() != XmlPullParser.START_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG || parser.getName() == null) {
                 continue;
             }
 
-            String name = parser.getName();
+            name = parser.getName();
+            Log.i("MyActivity", "approaching switch. name is " + name);
+
             switch(name)
             {
-                case "area-descripion":
+                case "area-description":
+                    Log.i("MyActivity", "going to call ReadAreaDesription.");
                     areaDescription = readAreaDescription(parser);
                     break;
                 case "weather-conditions":
@@ -137,8 +142,11 @@ public class WeatherXmlParser {
                     windDirection = readDirection(parser);
                     break;
                 case "temperature":
-                    temperature = readTemperature(parser);
-                    dewPoint = readDewPoint(parser);
+                    tagType = parser.getAttributeValue(null, "type");
+                    if (tagType.equals("apparent"))
+                        temperature = readTemperature(parser);
+                    else if (tagType.equals("dew point"))
+                        dewPoint = readDewPoint(parser);
                     break;
                 case "humidity":
                     humidity = readHumidity(parser);
@@ -150,13 +158,17 @@ public class WeatherXmlParser {
                     visibility = readVisibility(parser);
                     break;
                 case "wind-speed":
-                    windSpeed = readWindSpeed(parser);
-                    gustSpeed = readGustSpeed(parser);
+                    tagType = parser.getAttributeValue(null, "type");
+                    if (tagType.equals("sustained"))
+                        windSpeed = readWindSpeed(parser);
+                    else if (tagType.equals("gust"))
+                        gustSpeed = readGustSpeed(parser);
                     break;
-                default:
-                    skip(parser);
             }
+
+            nextStartTag(parser);
         }
+
         return new Entry(areaDescription, currentCondition, temperature, dewPoint, humidity,
                          pressure, visibility, windSpeed, windDirection, gustSpeed);
     }
@@ -164,125 +176,97 @@ public class WeatherXmlParser {
     private Integer readGustSpeed(XmlPullParser parser) throws IOException, XmlPullParserException {
         Integer gustSpeed = null;
         parser.require(XmlPullParser.START_TAG, ns, "wind-speed");
-        String tagType = parser.getAttributeValue(null, "type");
-        if (tagType.equals("gust"))
-        {
-            parser.next(); //move to the inner value tag
-            parser.require(XmlPullParser.START_TAG, ns, "value");
+        nextStartTag(parser); //move to the inner value tag
+        parser.require(XmlPullParser.START_TAG, ns, "value");
+        try {
             gustSpeed = Integer.parseInt(readText(parser));
-            parser.require(XmlPullParser.END_TAG, ns, "value");
-            parser.next();
         }
-        parser.require(XmlPullParser.END_TAG, ns, "wind-speed");
+        catch(Exception e)
+        {
+            gustSpeed = 0;
+        }
         return gustSpeed;
     }
 
     private Integer readWindSpeed(XmlPullParser parser) throws IOException, XmlPullParserException {
-        Integer gustSpeed = null;
+        Integer windSpeed = null;
         parser.require(XmlPullParser.START_TAG, ns, "wind-speed");
-        String tagType = parser.getAttributeValue(null, "type");
-        if (tagType.equals("sustained"))
-        {
-            parser.next(); //move to the inner value tag
-            parser.require(XmlPullParser.START_TAG, ns, "value");
-            gustSpeed = Integer.parseInt(readText(parser));
-            parser.require(XmlPullParser.END_TAG, ns, "value");
-            parser.next();
+        nextStartTag(parser); //move to the inner value tag
+        parser.require(XmlPullParser.START_TAG, ns, "value");
+        try {
+            windSpeed = Integer.parseInt(readText(parser));
         }
-        parser.require(XmlPullParser.END_TAG, ns, "wind-speed");
-        return gustSpeed;
+        catch(Exception e)
+        {
+            windSpeed = 0;
+        }
+        return windSpeed;
     }
 
     private Integer readVisibility(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "visibility");
-        Integer visibility = Integer.parseInt(readText(parser));
-        parser.require(XmlPullParser.END_TAG, ns, "visibility");
-        return visibility;
+        Double visibility = Double.parseDouble(readText(parser));
+        return visibility.intValue();
     }
 
-    private Integer readPressure(XmlPullParser parser) throws IOException, XmlPullParserException {
-        Integer pressure = null;
+    private Double readPressure(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "pressure");
-        parser.next(); //move to the inner value tag
+        nextStartTag(parser); //move to the inner value tag
         parser.require(XmlPullParser.START_TAG, ns, "value");
-        pressure = Integer.parseInt(readText(parser));
-        parser.require(XmlPullParser.END_TAG, ns, "value");
-        parser.next();
-        parser.require(XmlPullParser.END_TAG, ns, "pressure");
+        Double pressure = Double.parseDouble(readText(parser));
         return pressure;
     }
 
     private Integer readHumidity(XmlPullParser parser) throws IOException, XmlPullParserException {
-        Integer humidity = null;
+        Integer humidity = 0;
         parser.require(XmlPullParser.START_TAG, ns, "humidity");
-        parser.next(); //move to the inner value tag
+        nextStartTag(parser); //move to the inner value tag
         parser.require(XmlPullParser.START_TAG, ns, "value");
         humidity = Integer.parseInt(readText(parser));
-        parser.require(XmlPullParser.END_TAG, ns, "value");
-        parser.next();
-        parser.require(XmlPullParser.END_TAG, ns, "humidity");
         return humidity;
     }
 
     private Integer readDewPoint(XmlPullParser parser) throws IOException, XmlPullParserException {
-        Integer dewPoint = null;
+        Integer dewPoint = 0;
         parser.require(XmlPullParser.START_TAG, ns, "temperature");
         String tagType = parser.getAttributeValue(null, "type");
-        if (tagType.equals("dew point"))
-        {
-            parser.next(); //move to the inner value tag
-            parser.require(XmlPullParser.START_TAG, ns, "value");
-            dewPoint = Integer.parseInt(readText(parser));
-            parser.require(XmlPullParser.END_TAG, ns, "value");
-            parser.next();
-        }
-        parser.require(XmlPullParser.END_TAG, ns, "temperature");
+        nextStartTag(parser); //move to the inner value tag
+        parser.require(XmlPullParser.START_TAG, ns, "value");
+        dewPoint = Integer.parseInt(readText(parser));
         return dewPoint;
     }
 
     private Integer readTemperature(XmlPullParser parser) throws IOException, XmlPullParserException {
         Integer temperature = null;
         parser.require(XmlPullParser.START_TAG, ns, "temperature");
-
         String tagType = parser.getAttributeValue(null, "type");
-        if (tagType.equals("apparent"))
-        {
-            parser.next(); //move to the inner value tag
-            parser.require(XmlPullParser.START_TAG, ns, "value");
-            temperature = Integer.parseInt(readText(parser));
-            parser.require(XmlPullParser.END_TAG, ns, "value");
-            parser.next();
-        }
-        parser.require(XmlPullParser.END_TAG, ns, "temperature");
+        nextStartTag(parser);
+        parser.require(XmlPullParser.START_TAG, ns, "value");
+        temperature = Integer.parseInt(readText(parser));
         return temperature;
     }
 
     private String readDirection(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "direction");
-        parser.next(); //move to the inner value tag
+        nextStartTag(parser); //move to the inner value tag
         parser.require(XmlPullParser.START_TAG, ns, "value");
         String windDirection = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, "value");
-        parser.next();
-        parser.require(XmlPullParser.END_TAG, ns, "direction");
         return windDirection;
     }
 
     private String readCondition(XmlPullParser parser) throws IOException, XmlPullParserException {
         String condition = "";
         parser.require(XmlPullParser.START_TAG, ns, "weather-conditions");
-
         String tagType = parser.getAttributeValue(null, "weather-summary");
         if (tagType != null)
             condition = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, "weather-conditions");
         return condition;
     }
 
     private String readAreaDescription(XmlPullParser parser) throws IOException, XmlPullParserException {
-        parser.require(XmlPullParser.START_TAG, ns, "area-descripion");
+        Log.i("MyActivity", "entered readAreaDescription");
+        parser.require(XmlPullParser.START_TAG, ns, "area-description");
         String areaDescription = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, "area-descripion");
         return areaDescription;
     }
 
@@ -327,6 +311,19 @@ public class WeatherXmlParser {
                     break;
             }
         }
+    }
+
+    private void nextStartTag(XmlPullParser parser) throws XmlPullParserException, IOException
+    {
+        int tag = parser.next();
+
+        while (tag != XmlPullParser.START_TAG && tag != XmlPullParser.END_DOCUMENT)
+            tag = parser.next();
+    }
+
+    private void nextEndTag(XmlPullParser parser) throws XmlPullParserException, IOException
+    {
+        while (parser.next() != XmlPullParser.END_TAG);
     }
 }
 

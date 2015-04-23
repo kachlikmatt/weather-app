@@ -147,9 +147,9 @@ public class WeatherActivity extends ActionBarActivity {
 
         WeatherXmlParser.Entry weatherEntry = (WeatherXmlParser.Entry) parser.parse(in).get(0);
 
+        //to access weather entry properties just use weatherEntry.[property]
         Toast.makeText(getApplicationContext(), weatherEntry.areaDescription,
                 Toast.LENGTH_LONG).show();
-
     }
 
 
