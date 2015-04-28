@@ -1,13 +1,19 @@
 package edu.noctrl.kachlik.vic.weatherapp;
 
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -22,9 +28,11 @@ public class WeatherActivity extends ActionBarActivity {
 
     final WeatherXmlParser parser = new WeatherXmlParser();
     WeatherXmlParser.Entry weatherEntry;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    Drawable weatherDrawable;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         final Button button = (Button) findViewById(R.id.goBTN);
@@ -45,22 +53,25 @@ public class WeatherActivity extends ActionBarActivity {
             }
         });
     }
-        public void onRadioButtonClicked(View view) {
-            // Is the button now checked?
-            boolean checked = ((RadioButton) view).isChecked();
 
-            // Check which radio button was clicked
-            switch(view.getId()) {
-                case R.id.metricRb:
-                    if (checked)
-                        metricConverter();
-                        break;
-                case R.id.impericalRB:
-                    if (checked)
-                        imperialConverter();
-                        break;
-            }
+    public void onRadioButtonClicked(View view)
+    {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.metricRb:
+                if (checked)
+                    metricConverter();
+                    break;
+            case R.id.impericalRB:
+                if (checked)
+                    imperialConverter();
+                    break;
         }
+    }
+
     //converts from imperial to metric
     private void  metricConverter()
     {
@@ -91,17 +102,14 @@ public class WeatherActivity extends ActionBarActivity {
             windD = "E";
         }
 
-
         temp = (temp -32) * (5/9.0);
         dewPoint = (dewPoint -32) * (5/9.0);
         visibility = visibility * 1.6;
         windSpeed = windSpeed * 1.6;
         gusts = gusts * 1.6;
         pressure = pressure * 25.4;
-        
         TextView t =  (TextView)findViewById(R.id.temp);
         t.setText(temp + "C");
-
         t = (TextView)findViewById(R.id.dewPointTemp);
         t.setText(dewPoint + "C");
         t =  (TextView)findViewById(R.id.visibility);
@@ -114,10 +122,6 @@ public class WeatherActivity extends ActionBarActivity {
         t.setText(pressure + "mm");
         t =  (TextView)findViewById(R.id.humidity);
         t.setText(humidity + "%");
-
-
-
-
     }
     //uses saved values from xml to be placed back
     private void imperialConverter()
@@ -129,7 +133,10 @@ public class WeatherActivity extends ActionBarActivity {
         double gusts = weatherEntry.gustSpeed;
         double pressure = weatherEntry.pressure;
         int humidity = weatherEntry.humidity;
+        String imageUrl = weatherEntry.imageUrl;
         String windD = "";
+
+
         int xmlWindD = Integer.parseInt(weatherEntry.windDirection);
         if(xmlWindD <= 360 && xmlWindD >= 271)
         {
@@ -150,13 +157,11 @@ public class WeatherActivity extends ActionBarActivity {
 
         TextView t =  (TextView)findViewById(R.id.temp);
         t.setText(temp + "F");
-
         t = (TextView)findViewById(R.id.dewPointTemp);
         t.setText(dewPoint + "F");
         t =  (TextView)findViewById(R.id.visibility);
         t.setText(visibility + "mi");
         t = (TextView)findViewById(R.id.windSpeed);
-
         t.setText(windD+" @ " + windSpeed + "mph");
         t = (TextView)findViewById(R.id.gusts);
         t.setText(gusts + "mph");
@@ -171,10 +176,12 @@ public class WeatherActivity extends ActionBarActivity {
         t =  (TextView)findViewById(R.id.currTime);
         Calendar rightNow = Calendar.getInstance();
         t.setText(rightNow.getTime() + "");
+
+        //show the image
+        //new DownloadImageTask((ImageView) findViewById(R.id.currWeatherIMG)).execute(imageUrl);
     }
 
     /*
-
     assetChooser
     finds which assest the user wants
     based off zipcode then parses that file
@@ -188,35 +195,37 @@ public class WeatherActivity extends ActionBarActivity {
         final String LINCOLNWOOD = "lincolnwood";
         final String MERRILFIELD = "merrilField";
 
+        ImageView weatherImage = (ImageView) findViewById(R.id.currWeatherIMG);
 
         if(zipCode.equals("32880"))
         {
             city = BUENAVISTA;
+            weatherImage.setImageResource(R.drawable.nbkn);
         }
         else if(zipCode.equals("46825"))
         {
             city = FORTWAYNE;
+            weatherImage.setImageResource(R.drawable.nsct);
         }
         else if(zipCode.equals("90210"))
         {
             city = HOLLYWOOD;
+            weatherImage.setImageResource(R.drawable.sct);
         }
         else if(zipCode.equals("60640"))
         {
             city = LINCOLNWOOD;
+            weatherImage.setImageResource(R.drawable.nsct);
         }
         else
         {
             city = MERRILFIELD;
+            weatherImage.setImageResource(R.drawable.sct);
         }
         city += ".xml";
         AssetManager assetManager = getAssets();
         InputStream in = assetManager.open(city);
-
-
-         weatherEntry = (WeatherXmlParser.Entry) parser.parse(in).get(0);
-
-
+        weatherEntry = (WeatherXmlParser.Entry) parser.parse(in).get(0);
         imperialConverter();
     }
 
@@ -241,5 +250,32 @@ public class WeatherActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //*******************      Image Utility Class       ******************************//
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 }
