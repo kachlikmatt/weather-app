@@ -1,5 +1,11 @@
 package edu.noctrl.kachlik.vic.weatherapp;
 
+/*
+    Authors:
+    Matt Kachlik
+    Victor Bashorun
+ */
+
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
